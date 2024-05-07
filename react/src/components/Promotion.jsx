@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 const Promotion = (props) => {
   return (
     <div className="card">
