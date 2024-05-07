@@ -1,5 +1,3 @@
-import React from "react";
-
 const Search = () => {
   return (
     <form className="d-flex" role="search">
