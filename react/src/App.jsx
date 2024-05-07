@@ -1,3 +1,9 @@
+import Sock from "./components/Sock";
+import sock_data from "./assets/sock.json";
+import Footer from "./components/Footer";
+
+//import "./App.css";
+
 function App() {
   return (
     <>
@@ -85,7 +91,12 @@ function App() {
           <div className="row">
             Both socks and space rockets 🚀 will take you to new heights, but
             only one will get cold feet!
-            <div className="card-container"></div>
+            <div className="card-container">
+              <Sock data={sock_data} />
+            </div>
+          </div>
+          <div className="footer">
+            <Footer data={"DEVELOPMENT"} />
           </div>
         </div>
       </main>
