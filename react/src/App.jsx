@@ -1,8 +1,7 @@
 import Sock from "./components/Sock";
 import sock_data from "./assets/sock.json";
 import Footer from "./components/Footer";
-
-//import "./App.css";
+import Search from "./components/Search";
 
 function App() {
   return (
@@ -72,17 +71,7 @@ function App() {
                 </a>
               </li>
             </ul>
-            <form className="d-flex" role="search">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
+          <Search />
           </div>
         </div>
       </nav>
@@ -94,9 +83,7 @@ function App() {
             <div className="card-container">
               <Sock data={sock_data} />
             </div>
-          </div>
-          <div className="footer">
-            <Footer data={"DEVELOPMENT"} />
+            <Footer environment="Development"/>
           </div>
         </div>
       </main>
