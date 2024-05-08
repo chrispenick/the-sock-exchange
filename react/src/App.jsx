@@ -4,7 +4,7 @@ import promo_data from "./assets/promo.json";
 import Footer from "./components/Footer";
 import Search from "./components/Search";
 import Promotion from "./components/Promotion";
-import React, { useState, useEffect} from "react";
+import { useState, useEffect} from "react";
 
 function App() {
   const [data, setData] = useState([]);
