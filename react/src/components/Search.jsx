@@ -5,7 +5,23 @@ const Search = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Search submitted");
+    fetch(`${import.meta.env.VITE_SOCKS_API_URL}/search`, {
+      method: "POST",
+      body: JSON.stringify({ searchTerm }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response data
+        props.setData(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error(error);
+      });
   };
 
   const handleChange = (e) => {

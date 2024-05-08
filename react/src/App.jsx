@@ -24,6 +24,27 @@ function App() {
 
     fetchData();
   }, []);
+
+const handleDelete = async (sockId) => {
+  try {
+    // Make an API request to delete the sock with the given sockId
+    const response = await fetch(
+      `${import.meta.env.VITE_SOCKS_API_URL}/${sockId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Sock could not be deleted!");
+    }
+    // Update the state or fetch the updated data from the server
+    const updatedData = data.filter((sock) => sock._id !== sockId); // Remove the deleted sock from the data array
+    setData(updatedData); // Update the state with the updated data
+  } catch (error) {
+    console.error("Error deleting sock:", error);
+  }
+};
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -91,7 +112,7 @@ function App() {
                 </a>
               </li>
             </ul>
-            <Search />
+            <Search setData={setData} />
           </div>
         </div>
       </nav>
@@ -117,7 +138,7 @@ function App() {
               {
                 // Change from static sock_data to data coming from sock API
               data.map((sock) => (
-                <Sock key={sock._id} data={sock} />
+                <Sock key={sock._id} data={sock} handleDelete={handleDelete} />
               ))}
             </div>
             <Footer environment="Development" />
