@@ -1,11 +1,29 @@
 import Sock from "./components/Sock";
-import sock_data from "./assets/sock.json";
+//import sock_data from "./assets/sock.json";
 import promo_data from "./assets/promo.json";
 import Footer from "./components/Footer";
 import Search from "./components/Search";
 import Promotion from "./components/Promotion";
+import React, { useState, useEffect} from "react";
 
 function App() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async() => {
+      try {
+        const response = await fetch(import.meta.env.VITE_SOCKS_API_URL);
+        if (!response.ok) {
+          throw new Error('Data could not be fetched!');
+        }
+        const json_response = await response.json();
+        setData(json_response); //assign JSON response to the data variable.
+      } catch (error) {
+        console.error('Error fetching socks:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -96,8 +114,10 @@ function App() {
               className="card-container"
               style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}
             >
-              {sock_data.map((sock) => (
-                <Sock key={sock.id} data={sock} />
+              {
+                // Change from static sock_data to data coming from sock API
+              data.map((sock) => (
+                <Sock key={sock._id} data={sock} />
               ))}
             </div>
             <Footer environment="Development" />
